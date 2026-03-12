@@ -19,9 +19,9 @@ fun main(args: Array<String>) {
         try {
             val nombre = partes[0]
             val nivel = partes[1].toInt()
-            val atributo = Atributo.valueOf(partes[2].uppercase())
+            val atributo = partes[2].uppercase()
             val poder = partes[3].toInt()
-            CartaMostro(nombre, nivel, atributo, poder)
+            CartaMostro(nombre, nivel, poder, atributo)
         } catch (e: Exception) {
             // Si hay error en alguna línea, se ignora
             null
@@ -36,16 +36,16 @@ fun main(args: Array<String>) {
     // Función que determina si dos cartas comparten exactamente una característica
     fun compartenUna(c1: CartaMostro, c2: CartaMostro): Boolean {
         var count = 0
-        if (c1.nivel == c2.nivel) count++
-        if (c1.atributo == c2.atributo) count++
-        if (c1.poder == c2.poder) count++
+        if (c1.lvl == c2.lvl) count++
+        if (c1.att == c2.att) count++
+        if (c1.pwr == c2.pwr) count++
         return count == 1
     }
 
     // Llenar el grafo
     for (i in 0 until n) {
         for (j in i + 1 until n) {
-            if (comparenUna(cartas[i], cartas[j])) {
+            if (compartenUna(cartas[i], cartas[j])) {
                 ady[i].add(j)
                 ady[j].add(i)
             }
@@ -58,7 +58,7 @@ fun main(args: Array<String>) {
         for (v in ady[u]) {
             for (w in ady[v]) {
                 if (w != u) { // w distinto de u; w ya es distinto de v por construcción
-                    resultados.add("${cartas[u].nombre} ${cartas[v].nombre} ${cartas[w].nombre}")
+                    resultados.add("${cartas[u].name} ${cartas[v].name} ${cartas[w].name}")
                 }
             }
         }
