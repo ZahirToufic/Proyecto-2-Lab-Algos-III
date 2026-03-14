@@ -1,4 +1,3 @@
-//conviene que sea data o solo class? revisar si las data pueden tener funciones dentro
 data class CartaMostro(val name: String, val lvl: Int, val pwr: Int, val att: String) {
     companion object { 
     	//val atributos: Array<String> = ["AGUA", "FUEGO", "VIENTO", "TIERRA", "LUZ", "OSCURIDAD", "DIVINO"]
@@ -18,15 +17,3 @@ data class CartaMostro(val name: String, val lvl: Int, val pwr: Int, val att: St
     }
 }
 
-/*    fun share(mostro1, mostro2: CartaMostro): Boolean {
-        when {
-            mostro1.name == mostro2.name -> true
-            mostro1.lvl == mostro2.lvl -> true
-            mostro1.pwr == mostro2.pwr -> true
-            mostro1.att == mostro2.att -> true
-            else -> false
-        }
-
-    }
-
-}*/

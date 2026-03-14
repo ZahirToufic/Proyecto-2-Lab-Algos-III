@@ -13,7 +13,7 @@ fun main(args: Array<String>) {
     val lineas = File(fileName).readLines()
 
     // Saltar encabezado y parsear cada línea
-    val cartas = lineas.drop(1).mapNotNull { linea ->
+    val cartas = lineas.mapNotNull { linea ->
         val partes = linea.split(",").map { it.trim() }
         if (partes.size < 4) return@mapNotNull null
         try {
@@ -44,7 +44,7 @@ fun main(args: Array<String>) {
 
     // Llenar el grafo
     for (i in 0 until n) {
-        for (j in i + 1 until n) {
+        for (j in i until n) {
             if (compartenUna(cartas[i], cartas[j])) {
                 ady[i].add(j)
                 ady[j].add(i)
@@ -52,18 +52,40 @@ fun main(args: Array<String>) {
         }
     }
 
+
+
     // Enumerar todos los caminos de longitud 2 (u -> v -> w)
     val resultados = mutableListOf<String>()
     for (u in 0 until n) {
         for (v in ady[u]) {
             for (w in ady[v]) {
-                if (w != u) { // w distinto de u; w ya es distinto de v por construcción
                     resultados.add("${cartas[u].name} ${cartas[v].name} ${cartas[w].name}")
-                }
             }
         }
     }
 
     // Imprimir resultados
     resultados.forEach { println(it) }
+
+    println("\n")
+    println("Imprimimos el grafo para análisis posteriores: \n")
+
+    imprimirGrafo(cartas, ady)
+
+}
+
+    // Función para imprimir el grafo en el formato: vertice -> vecino1 -> vecino2
+fun imprimirGrafo(cartas: List<CartaMostro>, ady: List<List<Int>>) {
+    for (i in cartas.indices) {
+        val nombreVertice = cartas[i].name
+        
+        // Si el vértice tiene vecinos, los unimos con " -> "
+        if (ady[i].isNotEmpty()) {
+            val vecinos = ady[i].joinToString(" -> ") { cartas[it].name }
+            println("$nombreVertice -> $vecinos")
+        } else {
+            // Si es un vértice aislado (sin conexiones), solo imprimimos su nombre
+            println(nombreVertice)
+        }
+    }
 }
