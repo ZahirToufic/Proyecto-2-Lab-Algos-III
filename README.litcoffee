@@ -47,5 +47,5 @@ Para compilar los archivos `.kt` y generar el ejecutable `MundoChiquito.jar`:
 `make`
 
 ### 2. Ejecutar
-Escriba en la terminal `java -jar MundoChiquito.jar <archivo>`, donde <archivo> es un archivo .csv
+Escriba en la terminal `java -jar MundoChiquito.jar <archivo>`, donde "archivo" es un archivo .csv
 con el formato especificado para crear las cartas.
